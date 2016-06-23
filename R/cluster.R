@@ -14,7 +14,7 @@ SPADE.cluster <- function(tbl, k) {
 
 	# Invalid clusters have assgn == 0
 	centers = c()
-	is.na(clust$assgn) <- which(clust$assgn == 0)
+	is.na(clust$assgn) <- which(clust$assgn == 0) 
 	for (i in c(1:max(clust$assgn, na.rm=TRUE))) {  
 		obs <- which(clust$assgn == i)
 		if (length(obs) > 1) {
@@ -96,7 +96,8 @@ SPADE.FCSToTree <- function(
 	
 	# Write out FCS file downsampled data used in clustering, along with assignment
 	# Strip out observations in single observation clusters
-	ff <- SPADE.build.flowFrame(subset(cbind(data, cluster=clust$assign),!is.na(clust$assign)))
+	#ff <- SPADE.build.flowFrame(subset(cbind(data, cluster=clust$assign),!is.na(clust$assign)))
+	ff <- SPADE.build.flowFrame(cbind(data, cluster=clust$assign)) #HD 
 	write.FCS(ff, outfilename) 
 	
 	# Write out the MST and cluster centers to specified files ignoring single observation clusters
