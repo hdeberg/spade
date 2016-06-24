@@ -11,7 +11,8 @@ SPADE.cluster <- function(tbl, k) {
 	# Transpose table before call into row major order
 	cluster = Rclusterpp.hclust(tbl);
 	clust = list(assgn=cutree(cluster,k=k));
-
+        message("Printing clust from cuttree...")
+        print(clust)
 	# Invalid clusters have assgn == 0
 	centers = c()
 	is.na(clust$assgn) <- which(clust$assgn == 0) 
@@ -96,8 +97,8 @@ SPADE.FCSToTree <- function(
 	
 	# Write out FCS file downsampled data used in clustering, along with assignment
 	# Strip out observations in single observation clusters
-	#ff <- SPADE.build.flowFrame(subset(cbind(data, cluster=clust$assign),!is.na(clust$assign)))
-	ff <- SPADE.build.flowFrame(cbind(data, cluster=clust$assign)) #HD 
+	ff <- SPADE.build.flowFrame(subset(cbind(data, cluster=clust$assign),!is.na(clust$assign)))
+	#ff <- SPADE.build.flowFrame(cbind(data, cluster=clust$assign)) #HD 
 	write.FCS(ff, outfilename) 
 	
 	# Write out the MST and cluster centers to specified files ignoring single observation clusters
