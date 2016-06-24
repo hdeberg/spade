@@ -4,9 +4,9 @@ SPADE.cluster <- function(tbl, k) {
 		warning("Potentially too many observations for the clustering step",immediate=TRUE);
 	}
 
-	if (nrow(tbl) < k) {
-		stop("Number of requested clusters exceeds number of events")
-	}
+	#if (nrow(tbl) < k) {
+	#	stop("Number of requested clusters exceeds number of events")
+	#} #HD - run even when the number of clusters is less than k 
 
 	# Transpose table before call into row major order
 	cluster = Rclusterpp.hclust(tbl);
