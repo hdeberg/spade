@@ -13,6 +13,7 @@ SPADE.cluster <- function(tbl, k) {
 	clust = list(assgn=cutree(cluster,k=k));
         message("Printing clust from cuttree...")
         print(clust)
+	
 	# Invalid clusters have assgn == 0
 	centers = c()
 	is.na(clust$assgn) <- which(clust$assgn == 0) 
@@ -26,6 +27,11 @@ SPADE.cluster <- function(tbl, k) {
 		}
 	}
 	return(list(centers=centers,assign=clust$assgn,hclust=cluster))
+	message("Printing centers...")
+        print(centers)
+        message("Printing assign...")
+        print(clust$assign)
+        
 }
 
 SPADE.clustersToMST <- function(centers, method="manhattan") {
