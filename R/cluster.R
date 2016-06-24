@@ -26,12 +26,12 @@ SPADE.cluster <- function(tbl, k) {
 			is.na(clust$assgn) <- obs
 		}
 	}
-	return(list(centers=centers,assign=clust$assgn,hclust=cluster))
 	message("Printing centers...")
         print(centers)
         message("Printing assign...")
         print(clust$assign)
-        
+	return(list(centers=centers,assign=clust$assgn,hclust=cluster))
+
 }
 
 SPADE.clustersToMST <- function(centers, method="manhattan") {
